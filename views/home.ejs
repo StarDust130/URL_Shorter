@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    body {
+        font-family: serif;
+    }
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+</head>
+
+<body>
+    <center>
+        <h1>Hello From Babu bhaiya Pro Server 😆</h1>
+
+
+        <h3>Home Page 🙂</h3>
+
+
+        <h1>URl Shortener: </h1>
+
+        <div>
+            <form method="post" action="/url">
+                <label>Enter Your Original URL 👉</label>
+                <input type="text" placeholder="http://example.com" name="url">
+                <button type="submit">Generate😌</button>
+            </form>
+        </div>
+        <% if (locals.id) { %>
+
+            <p style="color: burlywood; font-weight: bold;">
+                URL 🫱 http://localhost:8001/url/<%= id %> 👇
+            </p>
+            <a target="_blank" href="http://localhost:8001/url/<%= id %>">URL</a>
+
+            <% } %>
+
+                <div>
+                    <% if (locals.urls) { %>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>S.No</th>
+                                    <th>ShortID</th>
+                                    <th>Redirect</th>
+                                    <th>Clicks</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% urls.forEach((url, index)=> { %>
+                                    <tr>
+                                        <td>
+                                            <%= index + 1 %>
+                                        </td>
+                                        <td>
+                                            <%= url.shortId %>
+                                        </td>
+                                        <td>
+                                            <%= url.redirectUrl %>
+                                        </td>
+                                        <td>
+                                            <%= url.visitHistory.length  %>
+
+                                        </td>
+                                    </tr>
+                                    <% }); %>
+                            </tbody>
+                        </table>
+                        <% } else { %>
+                            <p>No URLs found.</p>
+                            <% } %>
+                </div>
+
+
+    </center>
+
+</body>
+
+</html>
