@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
-const { unique } = require("next/dist/build/utils");
-const { redirect } = require("next/dist/server/api-utils");
+
 
 //! Create a new schema for our url data
 const urlSchema = new mongoose.Schema(
@@ -15,6 +14,10 @@ const urlSchema = new mongoose.Schema(
       required: true,
     },
     visitHistory: [{ timestamp: { type: Number } }],
+    createdBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
   },
   { timestamps: true }
 );
