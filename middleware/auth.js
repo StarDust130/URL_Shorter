@@ -1,5 +1,15 @@
 const { getUser } = require("../services/auth");
 
+const checkForAuthentication = (req, res, next) => {
+  const authHeaderValue = req.headers["authorization"];
+
+  if (!authHeaderValue || !authHeaderValue.startsWith("Bearer ")) return next();
+
+  const token = authHeaderValue.split(" ")[1];
+
+  getUser();
+};
+
 const restrictToLoggedinUserOnly = (req, res, next) => {
   const userUid = req.cookies?.uid;
   if (!userUid) return res.redirect("/login");
